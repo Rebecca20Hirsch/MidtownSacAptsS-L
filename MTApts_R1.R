@@ -1,3 +1,7 @@
+#Midtown Sacramento Apartments, Analysis Round 1
+#Making Simple 1 and 2 variable graphs
+#Written by Rebecca Hirsch 6/5/2020 Spafford & Lincoln, Inc.
+
 #import data
 MTData1 <- read.csv("~/Desktop/S&L/Coding/Midtown_Apartments/MTData1.csv")
 summary(MTData1)
