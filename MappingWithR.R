@@ -63,7 +63,25 @@ aptLocationSF <- subset(aptLocationSF, Frequency > 0)
 png("SmallestUnits.png", width = 650, height = 750)
 ggmap(midtown) + 
   geom_point(data = aptLocationSF, aes(x = long, y = lat, alpha = 0.75, size = SF), colour = "orange") +
-  scale_size_continuous(breaks = c(400, 550, 700, 850, 1000, 1150, 1300), range = c(1,12)) +
+  scale_size_continuous(breaks = c(400, 550, 700, 850, 1000, 1150, 1300), range = c(1,20)) +
   labs(size = "Square Footage of Unit", title = "Size of Units - Mapped", subtitle = "Midtown Sacramento") +
   guides(alpha = FALSE, color = FALSE)
 dev.off()
+
+aptLocationAge <- as.data.frame(table(MTData2$Longitude, MTData2$Latitude, MTData2$Year.built, MTData2$SF))
+names(aptLocationAge) <- c("long", "lat", "year", "size", "Frequency")
+aptLocationAge$long <- as.numeric(as.character(aptLocationAge$long))
+aptLocationAge$lat <- as.numeric(as.character(aptLocationAge$lat))
+aptLocationAge$year <- as.numeric(as.character(aptLocationAge$year))
+aptLocationAge$size <- as.numeric(as.character(aptLocationAge$size))
+aptLocationAge <- subset(aptLocationAge, Frequency > 0)
+
+png("AgeMapped.png", width = 650, height = 750)
+ggmap(midtown) + 
+  geom_point(data = aptLocationAge, aes(x = long, y = lat, color = year, size = size, alpha = 0.9)) +
+  scale_size_continuous(breaks = c(400, 550, 700, 850, 1000, 1150, 1300), range = c(1,15)) +
+  scale_color_continuous(low = "purple", high = "green", breaks = c(1900,1930,1960,1990, 2020)) +
+  labs(color = "year built", size = "square footage", title = "Year Built - Mapped", subtitle = "Midtown Sacramento") +
+  guides(alpha = FALSE)
+dev.off()
+

@@ -73,5 +73,22 @@ abline(lm(formula = OneBedMTData1$X..Sqft ~ OneBedMTData1$Year.built), col = "gr
 text(x=1970, y = 3, labels = (".01x - 17.12 = y"), cex = 1, adj = 0, srt = 17.12)
 dev.off()
 
+MTData3 <- read.csv("~/Desktop/S&L/Coding/Midtown_Apartments/MTData3.csv")
 
+WithWD <- filter(MTData3, Washer.Dryer == 1)
+WithoutWD <- filter(MTData3, Washer.Dryer == 0)
+
+png("W&DCostDifferential.png", width = 750, height = 500)
+WDchart <- boxplot(WithWD$Rent,
+                WithoutWD$Rent, 
+                col = c("cadetblue","tan"),
+                xlab= "",
+                ylab = "Rent ($/Month)",
+                horizontal= FALSE,
+                notch = FALSE,
+                boxwex = 0.2,
+                names = c("Washer/Dryer", "No Washer/Dryer"))
+text(x= 1.25, y= median(WithWD$Rent), labels= paste("n =", length(WithWD$Rent)))
+text(x= 2.25, y= median(WithoutWD$Rent), labels= paste("n =", length(WithoutWD$Rent)))
+dev.off()
 
