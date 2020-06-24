@@ -92,3 +92,4 @@ text(x= 1.25, y= median(WithWD$Rent), labels= paste("n =", length(WithWD$Rent)))
 text(x= 2.25, y= median(WithoutWD$Rent), labels= paste("n =", length(WithoutWD$Rent)))
 dev.off()
 
+
